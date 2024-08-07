@@ -31,6 +31,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor" }
 ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages-jvm", version.ref = "ktor" }
+ktor-server-webjars = { module = "io.ktor:ktor-server-webjars-jvm", version.ref = "ktor" }
 ktor-server-cors = { module = "io.ktor:ktor-server-cors-jvm", version.ref = "ktor" }
 ktor-server-loggin = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor" }
 ktor-server-call-id = { module = "io.ktor:ktor-server-call-id-jvm", version.ref = "ktor" }

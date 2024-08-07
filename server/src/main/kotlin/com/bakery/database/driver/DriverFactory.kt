@@ -7,6 +7,7 @@ import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.Application
 
 object DriverFactory {
+
     private lateinit var JDBC_URL: String
     private lateinit var JDBC_CLASS_NAME: String
     private lateinit var USERNAME: String

@@ -1,7 +1,6 @@
 package com.bakery.database.repository.product
 
 import com.bakery.BakeryProduct
-import com.bakery.database.helper.DbHelper
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -17,7 +16,7 @@ class ProductRepositoryImpl(
 ) : ProductRepository {
     override suspend fun findAll(): List<BakeryProduct> {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .findAll()
@@ -29,7 +28,7 @@ class ProductRepositoryImpl(
 
     override suspend fun findOneById(id: Int): BakeryProduct? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .findOneById(id)
@@ -41,7 +40,7 @@ class ProductRepositoryImpl(
 
     override suspend fun findOneByName(name: String): BakeryProduct? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .findOneByName(name)
@@ -53,7 +52,7 @@ class ProductRepositoryImpl(
 
     override suspend fun insert(e: BakeryProduct): BakeryProduct? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .insert(e)
@@ -65,7 +64,7 @@ class ProductRepositoryImpl(
 
     override suspend fun update(id: Int, e: BakeryProduct): BakeryProduct? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .update(
@@ -85,7 +84,7 @@ class ProductRepositoryImpl(
 
     override suspend fun softDelete(id: Int): BakeryProduct? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .softDelete(id)

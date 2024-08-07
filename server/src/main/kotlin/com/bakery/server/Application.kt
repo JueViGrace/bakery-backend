@@ -9,7 +9,7 @@ import com.bakery.server.config.configureSecurity
 import com.bakery.server.config.configureSerialization
 import com.bakery.server.config.configureValidation
 import com.bakery.server.router.appRoutes
-import com.bakery.web.client.BakeryClient.configureClient
+import com.bakery.web.client.KtorClient.configureClient
 import com.bakery.web.config.configureTemplating
 import io.ktor.server.application.Application
 import io.ktor.server.netty.EngineMain
@@ -21,8 +21,8 @@ fun main(args: Array<String>) {
 fun Application.module() {
     // Basic configuration
     configureKoin()
-    configureDatabase()
     configureSecurity()
+    configureDatabase()
     configureClient()
     configureRouting()
     configureValidation()

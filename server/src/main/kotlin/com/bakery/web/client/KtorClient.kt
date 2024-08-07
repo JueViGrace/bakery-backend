@@ -16,7 +16,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import kotlinx.serialization.json.Json
 
-object BakeryClient {
+object KtorClient {
     private lateinit var BASE_URL: String
     private var env: Boolean = false
 

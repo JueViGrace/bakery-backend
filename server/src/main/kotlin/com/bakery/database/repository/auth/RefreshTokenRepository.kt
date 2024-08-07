@@ -1,7 +1,6 @@
 package com.bakery.database.repository.auth
 
 import com.bakery.BakeryToken
-import com.bakery.database.helper.DbHelper
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -19,7 +18,7 @@ class RefreshTokenRepositoryImpl(
 ) : RefreshTokenRepository {
     override suspend fun findEmailByToken(token: String): BakeryToken? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.bakeryTokensQueries
                     .findEmailByToken(token)
                     .executeAsOneOrNull()
@@ -29,7 +28,7 @@ class RefreshTokenRepositoryImpl(
 
     override suspend fun findTokenByEmail(email: String): BakeryToken? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.bakeryTokensQueries
                     .findTokenByEmail(email)
                     .executeAsOneOrNull()
@@ -39,7 +38,7 @@ class RefreshTokenRepositoryImpl(
 
     override suspend fun insert(e: BakeryToken): BakeryToken? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryTokensQueries
                         .insert(e)
@@ -51,7 +50,7 @@ class RefreshTokenRepositoryImpl(
 
     override suspend fun updateToken(e: BakeryToken): BakeryToken? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryTokensQueries
                         .update(

@@ -1,16 +1,32 @@
 package com.bakery.web.templates
 
-import com.bakery.web.templates.content.mainPage
+import com.bakery.web.templates.components.pageFooter
+import com.bakery.web.templates.components.pageHeader
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.html.respondHtml
+import kotlinx.html.FlowContent
 import kotlinx.html.HTML
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.body
+import kotlinx.html.classes
 import kotlinx.html.head
 import kotlinx.html.lang
 import kotlinx.html.link
+import kotlinx.html.main
 import kotlinx.html.meta
 import kotlinx.html.script
+import kotlinx.html.section
 import kotlinx.html.title
 
-fun HTML.index() {
+suspend fun ApplicationCall.respondFullPage(e: HtmlBlockTag.() -> Unit) {
+    respondHtml {
+        layout {
+            e()
+        }
+    }
+}
+
+fun HTML.layout(e: HtmlBlockTag.() -> Unit) {
     lang = "es"
     head {
         meta {
@@ -23,9 +39,11 @@ fun HTML.index() {
         }
 
         script {
-            src = "https://unpkg.com/htmx.org@2.0.1"
-            integrity = "sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/"
-            attributes["crossorigin"] = "anonymous"
+            src = "https://unpkg.com/htmx.org@2.0.0"
+        }
+
+        script {
+            src = "https://unpkg.com/htmx-ext-preload@2.0.0/preload.js"
         }
 
         script {
@@ -68,6 +86,26 @@ fun HTML.index() {
     }
 
     body {
-        mainPage()
+        attributes["hx-ext"] = "preload"
+        mainPage {
+            e()
+        }
     }
+}
+
+fun FlowContent.mainPage(e: HtmlBlockTag.() -> Unit) = section {
+    classes = setOf("flex", "flex-col", "w-auto", "min-h-screen", "justify-center")
+
+    main {
+        classes = setOf("flex", "flex-col", "grow", "justify-center", "items-center")
+
+        pageHeader()
+
+        section {
+            classes = setOf("container", "mx-auto", "flex", "grow", "justify-center", "p-2")
+            e()
+        }
+    }
+
+    pageFooter()
 }

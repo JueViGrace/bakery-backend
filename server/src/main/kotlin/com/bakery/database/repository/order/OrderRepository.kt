@@ -5,7 +5,6 @@ import com.bakery.BakeryOrderWithProducts
 import com.bakery.FindAllByUser
 import com.bakery.FindAllOrders
 import com.bakery.FindOneOrder
-import com.bakery.database.helper.DbHelper
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -25,7 +24,7 @@ class OrderRepositoryImpl(
 ) : OrderRepository {
     override suspend fun findAllWithRelation(): List<FindAllOrders> {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryOrderQueries
                         .findAllOrders()
@@ -37,7 +36,7 @@ class OrderRepositoryImpl(
 
     override suspend fun findAllByUser(id: Int): List<FindAllByUser> {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryOrderQueries
                         .findAllByUser(id)
@@ -49,7 +48,7 @@ class OrderRepositoryImpl(
 
     override suspend fun findOneWithRelation(id: Int): List<FindOneOrder> {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryOrderQueries
                         .findOneOrder(id)
@@ -60,7 +59,7 @@ class OrderRepositoryImpl(
     }
 
     override suspend fun findOneById(id: Int): BakeryOrder? {
-        return DbHelper.withDatabase { db ->
+        return dbHelper.withDatabase { db ->
             db.transactionWithResult {
                 db.bakeryOrderQueries
                     .findOneById(id)
@@ -74,7 +73,7 @@ class OrderRepositoryImpl(
         orderWithProducts: List<BakeryOrderWithProducts>
     ): BakeryOrder? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     val savedOrder = db.bakeryOrderQueries
                         .insert(order)
@@ -95,7 +94,7 @@ class OrderRepositoryImpl(
     }
 
     override suspend fun updateStatus(id: Int, status: String): BakeryOrder? {
-        return DbHelper.withDatabase { db ->
+        return dbHelper.withDatabase { db ->
             db.transactionWithResult {
                 db.bakeryOrderQueries
                     .updateStatus(
@@ -108,7 +107,7 @@ class OrderRepositoryImpl(
     }
 
     override suspend fun softDelete(id: Int): BakeryOrder? {
-        return DbHelper.withDatabase { db ->
+        return dbHelper.withDatabase { db ->
             db.transactionWithResult {
                 db.bakeryOrderQueries
                     .softDelete(id)

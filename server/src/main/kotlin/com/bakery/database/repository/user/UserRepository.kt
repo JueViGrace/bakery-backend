@@ -1,7 +1,6 @@
 package com.bakery.database.repository.user
 
 import com.bakery.BakeryUser
-import com.bakery.database.helper.DbHelper
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -17,7 +16,7 @@ class UserRepositoryImpl(
 ) : UserRepository {
     override suspend fun findAll(): List<BakeryUser> {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .findAll()
@@ -29,7 +28,7 @@ class UserRepositoryImpl(
 
     override suspend fun findOneById(id: Int): BakeryUser? {
         return scope.async(coroutineContext) {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .findOneById(id)
@@ -41,7 +40,7 @@ class UserRepositoryImpl(
 
     override suspend fun findOneByEmail(email: String): BakeryUser? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .findOneByEmail(email)
@@ -53,7 +52,7 @@ class UserRepositoryImpl(
 
     override suspend fun insert(e: BakeryUser): BakeryUser? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .insert(e)
@@ -65,7 +64,7 @@ class UserRepositoryImpl(
 
     override suspend fun update(id: Int, e: BakeryUser): BakeryUser? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .update(
@@ -83,7 +82,7 @@ class UserRepositoryImpl(
 
     override suspend fun softDelete(id: Int): BakeryUser? {
         return scope.async {
-            DbHelper.withDatabase { db ->
+            dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryUserQueries
                         .softDelete(id = id)

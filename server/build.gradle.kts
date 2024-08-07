@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.status.pages)
+    implementation(libs.ktor.server.webjars)
     implementation(libs.ktor.server.cors)
     implementation(libs.ktor.server.loggin)
     implementation(libs.ktor.server.call.id)

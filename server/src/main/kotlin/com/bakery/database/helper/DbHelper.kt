@@ -1,12 +1,13 @@
 package com.bakery.database.helper
 
+import app.cash.sqldelight.db.SqlDriver
 import com.bakery.BakeryDb
 import com.bakery.database.driver.DriverFactory
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-internal object DbHelper {
-    private val driver = DriverFactory.initDatabase()
+object DbHelper {
+    private val driver: SqlDriver = DriverFactory.initDatabase()
 
     private var db: BakeryDb? = null
 
