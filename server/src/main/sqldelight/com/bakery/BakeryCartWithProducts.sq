@@ -1,0 +1,36 @@
+CREATE TABLE IF NOT EXISTS bakeryCartWithProducts (
+    cart_products_id INT NOT NULL,
+    product_cart_id INT NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY(cart_products_id, product_cart_id),
+    FOREIGN KEY(cart_products_id) REFERENCES bakeryCart(cart_id),
+    FOREIGN KEY(product_cart_id) REFERENCES bakeryProduct(product_id)
+);
+
+findAllById:
+SELECT *
+FROM bakeryCartWithProducts
+WHERE bakeryCartWithProducts.cart_products_id = :id;
+
+insert:
+INSERT INTO bakeryCartWithProducts(
+    cart_products_id,
+    product_cart_id,
+    quantity
+)
+VALUES ?
+ON CONFLICT (cart_products_id, product_cart_id) DO UPDATE
+SET
+    quantity = excluded.quantity
+RETURNING *;
+
+deleteProduct:
+DELETE FROM bakeryCartWithProducts
+WHERE
+cart_products_id = :cartId
+AND
+product_cart_id = :productId;
+
+deleteProducts:
+DELETE FROM bakeryCartWithProducts
+WHERE cart_products_id = :id;

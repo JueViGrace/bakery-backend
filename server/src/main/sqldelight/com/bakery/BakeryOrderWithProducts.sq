@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS bakeryOrderWithProducts(
+    order_products_id INT NOT NULL,
+    product_order_id INT NOT NULL,
+    price REAL NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (order_products_id, product_order_id),
+    FOREIGN KEY(order_products_id) REFERENCES bakeryOrder(order_id),
+    FOREIGN KEY(product_order_id) REFERENCES bakeryProduct(product_id)
+);
+
+insert:
+INSERT INTO
+bakeryOrderWithProducts(
+    order_products_id,
+    product_order_id,
+    price,
+    quantity
+)
+VALUES ?
+RETURNING *;
+
+delete:
+DELETE FROM bakeryOrderWithProducts
+WHERE order_products_id = :id;

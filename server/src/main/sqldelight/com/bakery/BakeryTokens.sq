@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS bakeryToken (
+    token TEXT NOT NULL,
+    user_email TEXT NOT NULL PRIMARY KEY
+);
+
+findTokenByEmail:
+SELECT *
+FROM bakeryToken
+WHERE bakeryToken.user_email = :email;
+
+findEmailByToken:
+SELECT *
+FROM bakeryToken
+WHERE bakeryToken.token = :token;
+
+insert:
+INSERT INTO bakeryToken (
+    token,
+    user_email
+)
+VALUES ?
+RETURNING *;
+
+update:
+UPDATE bakeryToken
+SET token = :token
+WHERE bakeryToken.user_email = :email
+RETURNING *;
