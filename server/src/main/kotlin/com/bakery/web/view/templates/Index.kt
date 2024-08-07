@@ -1,7 +1,7 @@
-package com.bakery.web.templates
+package com.bakery.web.view.templates
 
-import com.bakery.web.templates.components.pageFooter
-import com.bakery.web.templates.components.pageHeader
+import com.bakery.web.view.templates.components.pageFooter
+import com.bakery.web.view.templates.components.pageHeader
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.html.respondHtml
 import kotlinx.html.FlowContent
@@ -87,9 +87,8 @@ fun HTML.layout(e: HtmlBlockTag.() -> Unit) {
 
     body {
         attributes["hx-ext"] = "preload"
-        mainPage {
-            e()
-        }
+
+        e()
     }
 }
 

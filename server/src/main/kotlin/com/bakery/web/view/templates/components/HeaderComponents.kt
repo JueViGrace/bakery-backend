@@ -1,5 +1,8 @@
-package com.bakery.web.templates.components
+package com.bakery.web.view.templates.components
 
+import com.bakery.web.view.templates.components.NavigationMenu.Contact
+import com.bakery.web.view.templates.components.NavigationMenu.Home
+import com.bakery.web.view.templates.components.NavigationMenu.Shop
 import kotlinx.html.FlowContent
 import kotlinx.html.a
 import kotlinx.html.button
@@ -13,7 +16,7 @@ import kotlinx.html.p
 import kotlinx.html.section
 
 fun FlowContent.pageHeader() = section {
-    classes = setOf("w-full", "bg-gray-200")
+    classes = setOf("w-full", "bg-gray-100")
     header {
         classes = setOf(
             "container",
@@ -63,9 +66,9 @@ fun FlowContent.headerIcon() = div {
 fun FlowContent.headerNavMenu() = nav {
     classes = setOf("flex", "flex-row", "justify-between", "items-center", "gap-4", "p-2")
     listOf(
-        NavigationMenu.Home,
-        NavigationMenu.Shop,
-        NavigationMenu.Contact
+        Home,
+        Shop,
+        Contact
     ).forEach { item ->
         div {
             classes = setOf("h-full", "px-2", "hover:text-red-300")
@@ -84,28 +87,36 @@ fun FlowContent.headerAuthMenu() = div {
     id = "auth"
     classes = setOf("flex", "flex-row", "justify-center", "items-center", "gap-4")
 
-    button {
-        classes = setOf(
-            "border",
-            "rounded",
-            "p-2",
-            "hover:bg-red-300/50"
-        )
-        p {
-            +"Log in"
+    a {
+        href = "/login"
+        button {
+            classes = setOf(
+                "border",
+                "rounded",
+                "p-2",
+                "hover:bg-red-300/50"
+            )
+
+            p {
+                +"Log in"
+            }
         }
     }
-    button {
-        classes = setOf(
-            "text-gray-100",
-            "border",
-            "rounded",
-            "bg-red-400",
-            "p-2",
-            "hover:bg-red-500",
-        )
-        p {
-            +"Sign up"
+    a {
+        href = "/signup"
+        button {
+            classes = setOf(
+                "text-gray-100",
+                "border",
+                "rounded",
+                "bg-red-400",
+                "p-2",
+                "hover:bg-red-500",
+            )
+
+            p {
+                +"Sign up"
+            }
         }
     }
 }
