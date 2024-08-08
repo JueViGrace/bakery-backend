@@ -1,4 +1,4 @@
-package com.bakery.models
+package com.bakery.common
 
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.util.toLocalDateTime

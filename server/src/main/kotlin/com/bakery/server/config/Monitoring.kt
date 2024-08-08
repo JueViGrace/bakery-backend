@@ -10,7 +10,7 @@ import io.ktor.server.request.path
 import org.slf4j.event.Level
 
 fun Application.configureMonitoring() {
-    val env = environment.config.property("ktor.environment").getString().toBoolean()
+    val env = environment.config.property("ktor.development").getString().toBoolean()
 
     install(CallLogging) {
         level = if (env) {

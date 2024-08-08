@@ -22,7 +22,7 @@ object KtorClient {
 
     fun Application.configureClient() {
         BASE_URL = environment.config.property("ktor.deployment.domain").getString()
-        env = environment.config.property("ktor.environment").getString().toBoolean()
+        env = environment.config.property("ktor.development").getString().toBoolean()
     }
 
     fun client() = HttpClient(CIO) {

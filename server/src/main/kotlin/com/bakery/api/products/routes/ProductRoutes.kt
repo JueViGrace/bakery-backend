@@ -1,7 +1,7 @@
 package com.bakery.api.products.routes
 
 import com.bakery.api.products.service.ProductService
-import com.bakery.models.applicationResponse
+import com.bakery.common.applicationResponse
 import com.bakery.models.product.CreateProductDto
 import com.bakery.models.response.DefaultHttpResponse
 import io.ktor.server.application.call

@@ -1,6 +1,6 @@
-package com.bakery.models
+package com.bakery.common
 
-import com.bakery.models.Constants.status
+import com.bakery.common.Constants.status
 import com.bakery.models.response.AppResponse
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call

@@ -1,8 +1,8 @@
 package com.bakery.api.users.validation
 
-import com.bakery.models.Constants.validEmail
+import com.bakery.common.Constants.validEmail
 import com.bakery.models.user.UserDto
-import com.bakery.models.validDate
+import com.bakery.common.validDate
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 

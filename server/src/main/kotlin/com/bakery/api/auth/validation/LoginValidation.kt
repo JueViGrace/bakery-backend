@@ -1,6 +1,6 @@
 package com.bakery.api.auth.validation
 
-import com.bakery.models.Constants.validEmail
+import com.bakery.common.Constants.validEmail
 import com.bakery.models.auth.LoginDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult

@@ -2,8 +2,8 @@ package com.bakery.models.user
 
 import com.bakery.BakeryUser
 import com.bakery.models.auth.RegisterDto
-import com.bakery.models.toDate
-import com.bakery.models.toInstant
+import com.bakery.common.toDate
+import com.bakery.common.toInstant
 import io.ktor.server.http.toHttpDateString
 import io.ktor.server.util.toLocalDateTime
 import io.ktor.util.InternalAPI

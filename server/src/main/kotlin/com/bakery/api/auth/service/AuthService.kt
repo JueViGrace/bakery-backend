@@ -4,7 +4,7 @@ import com.auth0.jwt.interfaces.DecodedJWT
 import com.bakery.database.repository.auth.RefreshTokenRepository
 import com.bakery.database.repository.cart.CartRepository
 import com.bakery.database.repository.user.UserRepository
-import com.bakery.models.Constants.SALT_ROUNDS
+import com.bakery.common.Constants.SALT_ROUNDS
 import com.bakery.models.auth.AuthResponse
 import com.bakery.models.auth.LoginDto
 import com.bakery.models.auth.RegisterDto

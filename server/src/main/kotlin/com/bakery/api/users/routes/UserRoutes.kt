@@ -1,9 +1,9 @@
 package com.bakery.api.users.routes
 
 import com.bakery.api.users.service.UserService
-import com.bakery.models.applicationResponse
+import com.bakery.common.applicationResponse
 import com.bakery.models.auth.Role
-import com.bakery.models.extractUserIdFromPrincipal
+import com.bakery.common.extractUserIdFromPrincipal
 import com.bakery.models.response.DefaultHttpResponse
 import com.bakery.models.user.UserDto
 import io.ktor.server.application.ApplicationCall

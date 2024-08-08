@@ -1,8 +1,8 @@
 package com.bakery.api.orders.routes
 
 import com.bakery.api.orders.service.OrderService
-import com.bakery.models.applicationResponse
-import com.bakery.models.extractUserIdFromPrincipal
+import com.bakery.common.applicationResponse
+import com.bakery.common.extractUserIdFromPrincipal
 import com.bakery.models.order.UpdateOrderStatus
 import com.bakery.models.response.AppResponse.SuccessResponse
 import com.bakery.models.response.DefaultHttpResponse

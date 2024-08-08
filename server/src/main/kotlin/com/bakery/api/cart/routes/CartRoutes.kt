@@ -1,9 +1,9 @@
 package com.bakery.api.cart.routes
 
 import com.bakery.api.cart.service.CartService
-import com.bakery.models.applicationResponse
+import com.bakery.common.applicationResponse
 import com.bakery.models.cart.AddToCartDto
-import com.bakery.models.extractUserIdFromPrincipal
+import com.bakery.common.extractUserIdFromPrincipal
 import com.bakery.models.response.DefaultHttpResponse
 import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate

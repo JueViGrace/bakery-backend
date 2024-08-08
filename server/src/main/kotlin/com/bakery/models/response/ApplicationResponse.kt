@@ -1,7 +1,7 @@
 package com.bakery.models.response
 
-import com.bakery.models.Constants.UNEXPECTED_ERROR
-import com.bakery.models.Constants.time
+import com.bakery.common.Constants.UNEXPECTED_ERROR
+import com.bakery.common.Constants.time
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,7 +1,7 @@
 package com.bakery.api.auth.routes
 
 import com.bakery.api.auth.service.AuthService
-import com.bakery.models.applicationResponse
+import com.bakery.common.applicationResponse
 import com.bakery.models.auth.LoginDto
 import com.bakery.models.auth.RefreshTokenRequest
 import com.bakery.models.auth.RegisterDto
