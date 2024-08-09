@@ -81,6 +81,8 @@ dependencies {
 
     // Test
     testImplementation(libs.ktor.server.tests)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test.junit)
 }
 
 sqldelight {

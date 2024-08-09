@@ -8,6 +8,6 @@ import io.ktor.server.routing.routing
 fun Application.appRoutes() {
     routing {
         apiRoutes()
-        webRoutes()
+        //webRoutes()
     }
 }
