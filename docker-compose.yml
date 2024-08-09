@@ -1,14 +1,17 @@
 services:
-  bakery_db:
+  db:
     container_name: bakery
-    image: postgres
+    image: postgres:latest
     volumes:
-      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - 3308:5432
     environment:
       POSTGRES_USER: jvg_25
       POSTGRES_PASSWORD: root
       POSTGRES_HOST: localhost
-      POSTGRES_DB: bakery
-    restart: unless-stopped
+      POSTGRES_DB: bakery_db
+    restart: always
+
+volumes:
+  postgres-data:
