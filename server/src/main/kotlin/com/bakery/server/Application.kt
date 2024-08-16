@@ -23,13 +23,13 @@ fun Application.module() {
     configureKoin()
     configureSecurity()
     configureDatabase()
-    //configureClient()
+    configureClient()
     configureRouting()
     configureValidation()
     configureHTTP()
     configureMonitoring()
     configureSerialization()
-    //configureTemplating()
+    configureTemplating()
 
     // Application routes
     appRoutes()

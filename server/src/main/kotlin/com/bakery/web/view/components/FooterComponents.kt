@@ -1,4 +1,4 @@
-package com.bakery.web.view.templates.components
+package com.bakery.web.view.components
 
 import kotlinx.html.FlowContent
 import kotlinx.html.classes

@@ -1,7 +1,7 @@
-package com.bakery.web.view.templates
+package com.bakery.web.view
 
-import com.bakery.web.view.templates.components.pageFooter
-import com.bakery.web.view.templates.components.pageHeader
+import com.bakery.web.view.components.pageFooter
+import com.bakery.web.view.components.pageHeader
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.html.respondHtml
 import kotlinx.html.FlowContent

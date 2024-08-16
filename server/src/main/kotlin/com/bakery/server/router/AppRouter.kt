@@ -1,7 +1,7 @@
 package com.bakery.server.router
 
 import com.bakery.api.router.apiRoutes
-import com.bakery.web.view.router.webRoutes
+import com.bakery.web.router.webRoutes
 import io.ktor.server.application.Application
 import io.ktor.server.routing.routing
 

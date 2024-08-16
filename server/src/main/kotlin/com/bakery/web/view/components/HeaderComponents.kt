@@ -1,8 +1,8 @@
-package com.bakery.web.view.templates.components
+package com.bakery.web.view.components
 
-import com.bakery.web.view.templates.components.NavigationMenu.Contact
-import com.bakery.web.view.templates.components.NavigationMenu.Home
-import com.bakery.web.view.templates.components.NavigationMenu.Shop
+import com.bakery.web.view.components.NavigationMenu.Contact
+import com.bakery.web.view.components.NavigationMenu.Home
+import com.bakery.web.view.components.NavigationMenu.Shop
 import kotlinx.html.FlowContent
 import kotlinx.html.a
 import kotlinx.html.button
