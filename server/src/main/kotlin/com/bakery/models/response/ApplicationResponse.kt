@@ -3,8 +3,10 @@ package com.bakery.models.response
 import com.bakery.common.Constants.UNEXPECTED_ERROR
 import com.bakery.common.Constants.time
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.http.toHttpDateString
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
 
 @Serializable
 sealed class AppResponse<out T> {
@@ -14,7 +16,6 @@ sealed class AppResponse<out T> {
         val status: Int,
         @SerialName("description")
         val description: String,
-        @Serializable
         @SerialName("body")
         val body: T,
         @SerialName("message")
@@ -24,15 +25,15 @@ sealed class AppResponse<out T> {
     @Serializable
     data class FailureResponse(
         @SerialName("status")
-        val status: Int,
+        val status: Int = 500,
         @SerialName("description")
-        val description: String,
+        val description: String = "Unknown error",
         @SerialName("time")
-        val time: String = "",
+        val time: String = LocalDateTime.now().toHttpDateString(),
         @SerialName("message")
         val message: String? = null,
         @SerialName("error")
-        val error: String? = null,
+        val error: String? = "Internal server error",
         @SerialName("path")
         val path: String? = null,
     ) : AppResponse<Nothing>()

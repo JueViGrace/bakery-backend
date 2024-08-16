@@ -46,12 +46,9 @@ ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = 
 ktor-server-auth-sessions = { module = "io.ktor:ktor-server-sessions", version.ref = "ktor" }
 
 # [Templating]
-ktor-server-mustache = { module = "io.ktor:ktor-server-mustache", version.ref = "ktor" }
+ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref = "ktor" }
 ktor-server-html-builder = { module = "io.ktor:ktor-server-html-builder", version.ref = "ktor" }
 htmx = { group = "org.webjars.npm", name = "htmx.org", version.ref = "htmx" }
-
-# [KOTLIN WRAPPERS]
-kotlin-css = { module = "org.jetbrains.kotlin-wrappers:kotlin-css", version.ref = "kotlin-wrappers" }
 
 # [CLIENT]
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

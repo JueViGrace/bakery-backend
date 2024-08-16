@@ -14,6 +14,7 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
 object KtorClient {
@@ -25,6 +26,7 @@ object KtorClient {
         env = environment.config.property("ktor.development").getString().toBoolean()
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     fun client() = HttpClient(CIO) {
         install(Logging) {
             logger = Logger.SIMPLE
@@ -42,6 +44,8 @@ object KtorClient {
                 Json {
                     prettyPrint = true
                     ignoreUnknownKeys = true
+                    encodeDefaults = true
+                    explicitNulls = true
                 }
             )
         }
@@ -75,6 +79,8 @@ object KtorClient {
             }
         } catch (e: Exception) {
             error(e)
+        } finally {
+            FailureResponse()
         }
     }
 }

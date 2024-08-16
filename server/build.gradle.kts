@@ -48,9 +48,8 @@ dependencies {
 
     // Templating
     implementation(libs.htmx)
-    implementation(libs.ktor.server.mustache)
+    implementation(libs.ktor.server.thymeleaf)
     implementation(libs.ktor.server.html.builder)
-    implementation(libs.kotlin.css)
 
     // Kotlin Serialization
     implementation(libs.kotlinx.serialization.json)

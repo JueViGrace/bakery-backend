@@ -15,7 +15,7 @@ fun Application.configureSerialization() {
                 prettyPrint = true
                 ignoreUnknownKeys = true
                 encodeDefaults = true
-                explicitNulls = false
+                explicitNulls = true
             },
         )
     }
