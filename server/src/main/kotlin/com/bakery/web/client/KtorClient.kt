@@ -1,8 +1,7 @@
 package com.bakery.web.client
 
-import com.bakery.models.response.AppResponse
-import com.bakery.models.response.AppResponse.FailureResponse
-import com.bakery.models.response.AppResponse.SuccessResponse
+import com.bakery.web.client.ApiOperation.Failure
+import com.bakery.web.client.ApiOperation.Success
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
@@ -14,8 +13,11 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
+import io.ktor.server.http.toHttpDateString
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import java.time.LocalDateTime
 
 object KtorClient {
     private lateinit var BASE_URL: String
@@ -55,32 +57,40 @@ object KtorClient {
         }
     }
 
-    inline fun <T> safeApiCall(apiCall: () -> AppResponse<T>): AppResponse<T> {
+    inline fun <T> safeApiCall(apiCall: () -> T): ApiOperation<T> {
         return try {
-            when (val call = apiCall()) {
-                is FailureResponse -> {
-                    FailureResponse(
-                        status = call.status,
-                        description = call.description,
-                        time = call.time,
-                        message = call.message,
-                        error = call.error,
-                        path = call.path
-                    )
-                }
-                is SuccessResponse -> {
-                    SuccessResponse(
-                        status = call.status,
-                        description = call.description,
-                        body = call.body!!,
-                        message = call.message,
-                    )
-                }
-            }
+            Success(data = apiCall())
         } catch (e: Exception) {
-            error(e)
-        } finally {
-            FailureResponse()
+            Failure()
         }
     }
 }
+
+@Serializable
+sealed interface ApiOperation<out T> {
+    @Serializable
+    data class Success<T>(
+        val data: T,
+    ) : ApiOperation<T>
+
+    @Serializable
+    data class Failure(
+        val status: Int = 500,
+        val description: String = "Internal server error",
+        val time: String = LocalDateTime.now().toHttpDateString(),
+        val message: String? = null,
+        val error: String? = "Unknown error",
+        val path: String? = null,
+    ) : ApiOperation<Nothing>
+}
+
+@Serializable
+data class ApiResponse<T>(
+    val status: Int,
+    val description: String,
+    val body: T? = null,
+    val message: String? = null,
+    val time: String? = null,
+    val error: String? = null,
+    val path: String? = null,
+)

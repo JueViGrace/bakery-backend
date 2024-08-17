@@ -27,13 +27,13 @@ sealed class AppResponse<out T> {
         @SerialName("status")
         val status: Int = 500,
         @SerialName("description")
-        val description: String = "Unknown error",
+        val description: String = "Internal server error",
         @SerialName("time")
         val time: String = LocalDateTime.now().toHttpDateString(),
         @SerialName("message")
         val message: String? = null,
         @SerialName("error")
-        val error: String? = "Internal server error",
+        val error: String? = "Unknown error",
         @SerialName("path")
         val path: String? = null,
     ) : AppResponse<Nothing>()
@@ -53,7 +53,7 @@ sealed class AppResponse<out T> {
 
 object DefaultHttpResponse {
     // 200
-    inline fun<reified T> ok(
+    inline fun <reified T> ok(
         body: T,
         message: String? = null,
     ): AppResponse.SuccessResponse<T> {
@@ -66,7 +66,7 @@ object DefaultHttpResponse {
     }
 
     // 201
-    inline fun<reified T> created(
+    inline fun <reified T> created(
         body: T,
         message: String? = null,
     ): AppResponse.SuccessResponse<T> {
@@ -79,7 +79,7 @@ object DefaultHttpResponse {
     }
 
     // 202
-    inline fun<reified T> accepted(
+    inline fun <reified T> accepted(
         body: T,
         message: String? = null,
     ): AppResponse.SuccessResponse<T> {
@@ -92,7 +92,7 @@ object DefaultHttpResponse {
     }
 
     // 204
-    inline fun<reified T> noContent(
+    inline fun <reified T> noContent(
         body: T,
         message: String? = null,
     ): AppResponse.SuccessResponse<T> {
@@ -108,7 +108,7 @@ object DefaultHttpResponse {
     fun badRequest(
         error: String = "Invalid Request",
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.BadRequest.value,
@@ -124,7 +124,7 @@ object DefaultHttpResponse {
     fun unauthorized(
         error: String = "You are not authorized",
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.Unauthorized.value,
@@ -140,7 +140,7 @@ object DefaultHttpResponse {
     fun forbidden(
         error: String = "Forbidden resource",
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.Forbidden.value,
@@ -156,7 +156,7 @@ object DefaultHttpResponse {
     fun notFound(
         error: String,
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.NotFound.value,
@@ -171,7 +171,7 @@ object DefaultHttpResponse {
     fun methodNotAllowed(
         error: String,
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.MethodNotAllowed.value,
@@ -187,7 +187,7 @@ object DefaultHttpResponse {
     fun conflict(
         error: String,
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.Conflict.value,
@@ -203,7 +203,7 @@ object DefaultHttpResponse {
     fun internalServerError(
         error: String = UNEXPECTED_ERROR,
         message: String? = null,
-        path: String? = null
+        path: String? = null,
     ): AppResponse.FailureResponse {
         return AppResponse.FailureResponse(
             status = HttpStatusCode.InternalServerError.value,

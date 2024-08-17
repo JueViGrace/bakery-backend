@@ -1,9 +1,9 @@
 package com.bakery.web.router
 
 import com.bakery.models.product.ProductDto
-import com.bakery.models.response.AppResponse
-import com.bakery.models.response.AppResponse.FailureResponse
-import com.bakery.models.response.AppResponse.SuccessResponse
+import com.bakery.web.client.ApiOperation.Failure
+import com.bakery.web.client.ApiOperation.Success
+import com.bakery.web.client.ApiResponse
 import com.bakery.web.client.KtorClient
 import com.bakery.web.view.components.products
 import io.ktor.client.call.body
@@ -58,24 +58,31 @@ fun Route.components() {
 
     route("/products") {
         get {
-            val products =
+            val products = KtorClient.safeApiCall {
                 KtorClient.client()
                     .get(urlString = "/api/products")
-                    .body<AppResponse<List<ProductDto>>>()
-
+                    .body<ApiResponse<List<ProductDto>>>()
+            }
 
             when (products) {
-                is FailureResponse -> call.respondHtml {
+                is Failure -> call.respondHtml {
                     body {
                         h1 {
                             +"${products.message} ${products.description}"
                         }
                     }
                 }
-                is SuccessResponse -> {
+
+                is Success -> {
                     call.respondHtml {
                         body {
-                            products(products.body)
+                            if (statusCodes.contains(products.data.status)) {
+                                products.data.body?.let { it1 -> products(it1) }
+                            } else {
+                                h1 {
+                                    +"${products.data.message} ${products.data.description}"
+                                }
+                            }
                         }
                     }
                 }
@@ -83,3 +90,6 @@ fun Route.components() {
         }
     }
 }
+
+
+val statusCodes = listOf(200, 201, 202, 203, 204)
