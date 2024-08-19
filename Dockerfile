@@ -4,5 +4,5 @@ RUN apk add --no-cache bash
 
 WORKDIR /bakery-backend
 
-CMD ./gradlew run
+CMD ./gradle run
 
