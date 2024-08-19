@@ -1,9 +1,8 @@
-FROM openjdk:21
+FROM openjdk:12-jdk-alpine
 
-EXPOSE 5000:5000
+RUN apk add --no-cache bash
 
-RUN MKDIR /app
+WORKDIR /bakery-backend
 
-COPY ./server/build/libs/*-all.jar /app/bakery.jar
+CMD ./gradlew run
 
-ENTRYPOINT["java", "-jar", "/app/bakery.jar"]
