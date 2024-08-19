@@ -10,7 +10,7 @@ import kotlinx.html.img
 
 fun FlowContent.products(products: List<ProductDto>) {
     article {
-        classes = setOf("flex", "flex-row", "flex-wrap", "grow", "justify-center", "items-center", "gap-2", "p-2")
+        classes = setOf("flex", "flex-row", "flex-wrap", "justify-center", "items-center", "gap-2", "p-2")
         products.forEach { product ->
             div {
                 classes = setOf("p-2")
