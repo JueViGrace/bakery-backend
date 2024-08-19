@@ -1,3 +1,5 @@
+import groovy.xml.dom.DOMCategory.attributes
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -11,12 +13,6 @@ version = libs.versions.app.version
 
 application {
     mainClass.set("com.bakery.server.ApplicationKt")
-}
-
-ktor {
-    fatJar {
-        archiveFileName.set("bakery.jar")
-    }
 }
 
 dependencies {
@@ -92,5 +88,11 @@ sqldelight {
 //            deriveSchemaFromMigrations.set(true)
             dialect(libs.sqldelight.dialect)
         }
+    }
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("bakery.jar")
     }
 }

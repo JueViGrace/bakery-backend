@@ -17,12 +17,12 @@ CREATE TABLE IF NOT EXISTS "public"."bakeryuser"(
 
 CREATE TABLE IF NOT EXISTS "public"."bakeryproduct"(
     product_id SERIAL NOT NULL PRIMARY KEY,
-    price NUMERIC NOT NULL DEFAULT 0.0,
+    price NUMERIC NOT NULL,
     name VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL DEFAULT '',
+    description TEXT DEFAULT '',
     category VARCHAR(255) NOT NULL DEFAULT '',
     stock INT NOT NULL DEFAULT 0,
-    image TEXT NOT NULL DEFAULT '',
+    image TEXT DEFAULT '',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP DEFAULT NULL
