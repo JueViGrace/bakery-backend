@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS bakeryUser(
-    user_id SERIAL NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS bakery_user(
+    id SERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     lastname VARCHAR(30) NOT NULL,
     email TEXT NOT NULL UNIQUE,
@@ -14,25 +14,25 @@ CREATE TABLE IF NOT EXISTS bakeryUser(
 
 findAll:
 SELECT *
-FROM bakeryUser
-WHERE bakeryUser.deleted_at IS NULL;
+FROM bakery_user
+WHERE bakery_user.deleted_at IS NULL;
 
 findOneById:
 SELECT *
-FROM bakeryUser
+FROM bakery_user
 WHERE
-bakeryUser.user_id = :id
+bakery_user.id = :id
 AND
-bakeryUser.deleted_at IS NULL;
+bakery_user.deleted_at IS NULL;
 
 findOneByEmail:
 SELECT *
-FROM bakeryUser
+FROM bakery_user
 WHERE
-bakeryUser.email = :email;
+bakery_user.email = :email;
 
 insert:
-INSERT INTO bakeryUser (
+INSERT INTO bakery_user (
     name,
     lastname,
     email,
@@ -44,27 +44,27 @@ VALUES ?
 RETURNING *;
 
 update:
-UPDATE bakeryUser
+UPDATE bakery_user
 SET
     name = :name,
     lastname = :lastname,
     birth_date = :birth_date,
     phone = :phone,
     updated_at = CURRENT_TIMESTAMP
-WHERE user_id = :id
+WHERE id = :id
 RETURNING *;
 
 softDelete:
-UPDATE bakeryUser
+UPDATE bakery_user
 SET deleted_at = CURRENT_TIMESTAMP
-WHERE bakeryUser.user_id = :id
+WHERE bakery_user.id = :id
 RETURNING *;
 
 deleteById:
-DELETE FROM bakeryUser
-WHERE bakeryUser.user_id = :id
+DELETE FROM bakery_user
+WHERE bakery_user.id = :id
 RETURNING *;
 
 delete:
-DELETE FROM bakeryUser
+DELETE FROM bakery_user
 RETURNING *;

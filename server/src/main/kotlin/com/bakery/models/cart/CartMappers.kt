@@ -1,25 +1,25 @@
 package com.bakery.models.cart
 
-import com.bakery.BakeryCart
-import com.bakery.BakeryCartWithProducts
-import com.bakery.BakeryOrder
-import com.bakery.BakeryOrderWithProducts
 import com.bakery.FindCartById
 import com.bakery.models.order.OrderStatus
 import com.bakery.models.product.ProductDto
 import io.ktor.server.http.toHttpDateString
+import com.bakery.Bakery_cart as BakeryCart
+import com.bakery.Bakery_cart_products as BakeryCartWithProducts
+import com.bakery.Bakery_order as BakeryOrder
+import com.bakery.Bakery_order_products as BakeryOrderWithProducts
 
 fun CartDto.toDatabase(): BakeryCart = BakeryCart(
-    cart_id = cartId,
+    id = id,
     total_amount = totalAmount
 )
 
 fun CartDto.toDatabaseOrder(): BakeryOrder = BakeryOrder(
-    order_id = 0,
+    id = 0,
     total_amount = totalAmount,
     payment_method = "cash",
     status = OrderStatus.PLACED.value,
-    order_user_id = cartId,
+    user_id = id,
     created_at = null,
     updated_at = null,
     deleted_at = null
@@ -28,8 +28,8 @@ fun CartDto.toDatabaseOrder(): BakeryOrder = BakeryOrder(
 fun CartDto.toOrderProducts(): List<BakeryOrderWithProducts> {
     return items.map { item ->
         BakeryOrderWithProducts(
-            order_products_id = 0,
-            product_order_id = item.productDto.productId,
+            order_id = 0,
+            product_id = item.productDto.productId,
             price = item.productDto.price,
             quantity = item.quantity
         )
@@ -39,8 +39,8 @@ fun CartDto.toOrderProducts(): List<BakeryOrderWithProducts> {
 fun CartDto.itemsToDatabase(): List<BakeryCartWithProducts> {
     return items.map { item ->
         BakeryCartWithProducts(
-            cart_products_id = cartId,
-            product_cart_id = item.productDto.productId,
+            cart_id = id,
+            product_id = item.productDto.productId,
             quantity = item.quantity
         )
     }
@@ -49,8 +49,8 @@ fun CartDto.itemsToDatabase(): List<BakeryCartWithProducts> {
 fun List<AddToCartItemsDto>.toDatabase(cartId: Int): List<BakeryCartWithProducts> {
     return this.map { item ->
         BakeryCartWithProducts(
-            cart_products_id = cartId,
-            product_cart_id = item.productId,
+            cart_id = cartId,
+            product_id = item.productId,
             quantity = item.quantity,
         )
     }
@@ -59,7 +59,7 @@ fun List<AddToCartItemsDto>.toDatabase(cartId: Int): List<BakeryCartWithProducts
 fun List<FindCartById>.toDto(): CartDto {
     val cartItems = this.groupBy { cart ->
         CartDto(
-            cartId = cart.cart_id,
+            id = cart.id,
             totalAmount = cart.total_amount,
             items = emptyList()
         )
@@ -71,7 +71,7 @@ fun List<FindCartById>.toDto(): CartDto {
         when {
             value.map { it.product_id }.first() == null -> {
                 cartDto = cartDto.copy(
-                    cartId = key.cartId,
+                    id = key.id,
                     totalAmount = key.totalAmount,
                     items = key.items
                 )
@@ -79,7 +79,7 @@ fun List<FindCartById>.toDto(): CartDto {
 
             else -> {
                 cartDto = cartDto.copy(
-                    cartId = key.cartId,
+                    id = key.id,
                     totalAmount =
                     value.sumOf { (it.quantity ?: 0) * (it.price ?: 0.0) },
                     items =

@@ -1,18 +1,20 @@
 package com.bakery.database.repository.cart
 
-import com.bakery.BakeryCart
-import com.bakery.BakeryCartWithProducts
-import com.bakery.BakeryProduct
+import com.bakery.Bakery_cart
 import com.bakery.FindCartById
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlin.coroutines.CoroutineContext
+import com.bakery.Bakery_cart as BakeryCart
+import com.bakery.Bakery_cart_products as BakeryCartWithProducts
+import com.bakery.Bakery_product as BakeryProduct
 
 interface CartRepository : DataSource<BakeryCart> {
     suspend fun findCartById(id: Int): List<FindCartById>
     suspend fun addItemsToCart(id: Int, e: List<BakeryCartWithProducts>): BakeryCart?
     suspend fun removeItem(id: Int, e: List<BakeryCartWithProducts>): BakeryCart?
+    suspend fun removeAll(id: Int): BakeryCart?
 }
 
 class CartRepositoryImpl(
@@ -64,7 +66,7 @@ class CartRepositoryImpl(
                 db.transactionWithResult {
                     e.map {
                         db.bakeryCartWithProductsQueries
-                            .deleteProduct(it.cart_products_id, it.product_cart_id)
+                            .deleteProduct(it.cart_id, it.product_id)
                     }
 
                     val productsInCart = db.bakeryCartWithProductsQueries.findAllById(id).executeAsList()
@@ -86,9 +88,26 @@ class CartRepositoryImpl(
         }.await()
     }
 
+    override suspend fun removeAll(id: Int): Bakery_cart? {
+        return scope.async {
+            dbHelper.withDatabase { db ->
+                db.transactionWithResult {
+                    db.bakeryCartWithProductsQueries.deleteProducts(id)
+
+                    db.bakeryCartQueries
+                        .update(
+                            id = id,
+                            totalAmount = 0.0
+                        )
+                        .executeAsOneOrNull()
+                }
+            }
+        }.await()
+    }
+
     private fun calculateTotalAmount(e: List<BakeryCartWithProducts>, products: (Int) -> BakeryProduct?): Double {
         return e.sumOf { bp ->
-            val product = products(bp.product_cart_id)
+            val product = products(bp.product_id)
 
             if (product != null) {
                 bp.quantity * product.price

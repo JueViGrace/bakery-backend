@@ -1,6 +1,6 @@
 package com.bakery.models.auth
 
-import com.bakery.BakeryToken
+import com.bakery.Bakery_token as BakeryToken
 
 fun BakeryToken.toToken(): Token = Token(
     token = token,

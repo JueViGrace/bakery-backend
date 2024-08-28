@@ -1,10 +1,10 @@
 package com.bakery.api.auth.service
 
 import com.auth0.jwt.interfaces.DecodedJWT
+import com.bakery.common.Constants.SALT_ROUNDS
 import com.bakery.database.repository.auth.RefreshTokenRepository
 import com.bakery.database.repository.cart.CartRepository
 import com.bakery.database.repository.user.UserRepository
-import com.bakery.common.Constants.SALT_ROUNDS
 import com.bakery.models.auth.AuthResponse
 import com.bakery.models.auth.LoginDto
 import com.bakery.models.auth.RegisterDto
@@ -44,19 +44,19 @@ class AuthService(
 
                 if (savedUser != null) {
                     val accessToken = jwtService.createAccessToken(
-                        id = savedUser.user_id,
+                        id = savedUser.id,
                         email = savedUser.email,
                         role = savedUser.role
                     )
                     val refreshToken = jwtService.createRefreshToken(
-                        id = savedUser.user_id,
+                        id = savedUser.id,
                         email = savedUser.email,
                         role = savedUser.role
                     )
 
                     refreshTokenRepository.insert(Token(token = refreshToken, email = savedUser.email).toDatabase())
 
-                    cartRepository.insert(CartDto(cartId = savedUser.user_id).toDatabase())
+                    cartRepository.insert(CartDto(id = savedUser.id).toDatabase())
 
                     DefaultHttpResponse.created(
                         AuthResponse(
@@ -81,11 +81,9 @@ class AuthService(
                         "User with email ${loginDto.email} was not found"
                     )
 
-                println(user)
-
                 if (Bcrypt.verify(loginDto.password, user.password.toByteArray())) {
-                    val accessToken = jwtService.createAccessToken(id = user.user_id, email = user.email, role = user.role)
-                    val refreshToken = jwtService.createRefreshToken(id = user.user_id, email = user.email, role = user.role)
+                    val accessToken = jwtService.createAccessToken(id = user.id, email = user.email, role = user.role)
+                    val refreshToken = jwtService.createRefreshToken(id = user.id, email = user.email, role = user.role)
 
                     if (refreshTokenRepository.findTokenByEmail(loginDto.email) == null) {
                         refreshTokenRepository.insert(Token(token = refreshToken, email = user.email).toDatabase())
@@ -118,12 +116,12 @@ class AuthService(
 
             if (foundUser != null && emailFromToken == foundUser.email) {
                 val newRefreshToken = jwtService.createRefreshToken(
-                    id = foundUser.user_id,
+                    id = foundUser.id,
                     email = foundUser.email,
                     role = foundUser.role
                 )
                 val newToken = jwtService.createAccessToken(
-                    id = foundUser.user_id,
+                    id = foundUser.id,
                     email = foundUser.email,
                     role = foundUser.role
                 )

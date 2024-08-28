@@ -115,7 +115,7 @@ class ProductService(
 
                 if (deletedProduct != null) {
                     DefaultHttpResponse.noContent(
-                        "Product ${deletedProduct.name} (${deletedProduct.product_id}) was deleted successfully"
+                        "Product ${deletedProduct.name} (${deletedProduct.id}) was deleted successfully"
                     )
                 } else {
                     DefaultHttpResponse.badRequest("Unable to delete the product")

@@ -1,13 +1,15 @@
 package com.bakery.database.repository.product
 
-import com.bakery.BakeryProduct
+import com.bakery.Bakery_product
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlin.coroutines.CoroutineContext
+import com.bakery.Bakery_product as BakeryProduct
 
 interface ProductRepository : DataSource<BakeryProduct> {
     suspend fun findOneByName(name: String): BakeryProduct?
+    suspend fun updateStock(id: Int, stock: Int, quantity: Int): BakeryProduct?
 }
 
 class ProductRepositoryImpl(
@@ -44,6 +46,21 @@ class ProductRepositoryImpl(
                 db.transactionWithResult {
                     db.bakeryProductQueries
                         .findOneByName(name)
+                        .executeAsOneOrNull()
+                }
+            }
+        }.await()
+    }
+
+    override suspend fun updateStock(id: Int, stock: Int, quantity: Int): Bakery_product? {
+        return scope.async(coroutineContext) {
+            dbHelper.withDatabase { db ->
+                db.transactionWithResult {
+                    db.bakeryProductQueries
+                        .updateStock(
+                            id = id,
+                            stock = stock - quantity
+                        )
                         .executeAsOneOrNull()
                 }
             }

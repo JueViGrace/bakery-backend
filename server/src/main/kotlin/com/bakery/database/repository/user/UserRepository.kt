@@ -1,10 +1,10 @@
 package com.bakery.database.repository.user
 
-import com.bakery.BakeryUser
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlin.coroutines.CoroutineContext
+import com.bakery.Bakery_user as BakeryUser
 
 interface UserRepository : DataSource<BakeryUser> {
     suspend fun findOneByEmail(email: String): BakeryUser? = null

@@ -1,7 +1,7 @@
 package com.bakery.database.repository.order
 
-import com.bakery.BakeryOrder
-import com.bakery.BakeryOrderWithProducts
+import com.bakery.Bakery_order as BakeryOrder
+import com.bakery.Bakery_order_products as BakeryOrderWithProducts
 import com.bakery.FindAllByUser
 import com.bakery.FindAllOrders
 import com.bakery.FindOneOrder
@@ -82,7 +82,7 @@ class OrderRepositoryImpl(
                     if (savedOrder != null) {
                         orderWithProducts.forEach { orderProducts ->
                             db.bakeryOrderWithProductsQueries
-                                .insert(orderProducts.copy(order_products_id = savedOrder.order_id))
+                                .insert(orderProducts.copy(order_id = savedOrder.id))
                                 .executeAsList()
                         }
                     }

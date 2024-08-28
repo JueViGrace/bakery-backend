@@ -1,18 +1,18 @@
-CREATE TABLE IF NOT EXISTS bakeryOrderWithProducts(
-    order_products_id INT NOT NULL,
-    product_order_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS bakery_order_products(
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
     price REAL NOT NULL,
     quantity INT NOT NULL,
-    PRIMARY KEY (order_products_id, product_order_id),
-    FOREIGN KEY(order_products_id) REFERENCES bakeryOrder(order_id),
-    FOREIGN KEY(product_order_id) REFERENCES bakeryProduct(product_id)
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY(order_id) REFERENCES bakery_order(id),
+    FOREIGN KEY(product_id) REFERENCES bakery_product(id)
 );
 
 insert:
 INSERT INTO
-bakeryOrderWithProducts(
-    order_products_id,
-    product_order_id,
+bakery_order_products(
+    order_id,
+    product_id,
     price,
     quantity
 )
@@ -20,5 +20,5 @@ VALUES ?
 RETURNING *;
 
 delete:
-DELETE FROM bakeryOrderWithProducts
-WHERE order_products_id = :id;
+DELETE FROM bakery_order_products
+WHERE order_id = :id;

@@ -1,15 +1,15 @@
 package com.bakery.models.user
 
-import com.bakery.BakeryUser
-import com.bakery.models.auth.RegisterDto
 import com.bakery.common.toDate
 import com.bakery.common.toInstant
+import com.bakery.models.auth.RegisterDto
 import io.ktor.server.http.toHttpDateString
 import io.ktor.server.util.toLocalDateTime
 import io.ktor.util.InternalAPI
+import com.bakery.Bakery_user as BakeryUser
 
 fun BakeryUser.toDto(): UserDto = UserDto(
-    userId = user_id,
+    userId = id,
     name = name,
     lastname = lastname,
     email = email,
@@ -22,7 +22,7 @@ fun BakeryUser.toDto(): UserDto = UserDto(
 
 @OptIn(InternalAPI::class)
 fun RegisterDto.toInsert(): BakeryUser = BakeryUser(
-    user_id = 0,
+    id = 0,
     name = name,
     lastname = lastname,
     email = email,
@@ -37,7 +37,7 @@ fun RegisterDto.toInsert(): BakeryUser = BakeryUser(
 
 @OptIn(InternalAPI::class)
 fun UserDto.toUpdate(): BakeryUser = BakeryUser(
-    user_id = userId,
+    id = userId,
     name = name,
     lastname = lastname,
     birth_date = birthDate.toInstant().toDate().toLocalDateTime(),

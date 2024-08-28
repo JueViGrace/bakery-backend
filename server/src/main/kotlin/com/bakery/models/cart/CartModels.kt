@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CartDto(
     @SerialName("cart_id")
-    val cartId: Int = 0,
+    val id: Int = 0,
     @SerialName("total_amount")
     val totalAmount: Double = 0.0,
     @SerialName("items")

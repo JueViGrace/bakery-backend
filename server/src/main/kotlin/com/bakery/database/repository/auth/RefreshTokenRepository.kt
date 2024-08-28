@@ -1,6 +1,6 @@
 package com.bakery.database.repository.auth
 
-import com.bakery.BakeryToken
+import com.bakery.Bakery_token as BakeryToken
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async

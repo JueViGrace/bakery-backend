@@ -1,10 +1,10 @@
 package com.bakery.models.product
 
-import com.bakery.BakeryProduct
 import io.ktor.server.http.toHttpDateString
+import com.bakery.Bakery_product as BakeryProduct
 
 fun BakeryProduct.toDto(): ProductDto = ProductDto(
-    productId = product_id,
+    productId = id,
     name = name,
     description = description,
     price = price,
@@ -17,7 +17,7 @@ fun BakeryProduct.toDto(): ProductDto = ProductDto(
 )
 
 fun ProductDto.toDatabase(): BakeryProduct = BakeryProduct(
-    product_id = productId,
+    id = productId,
     name = name,
     description = description,
     price = price,
@@ -30,7 +30,7 @@ fun ProductDto.toDatabase(): BakeryProduct = BakeryProduct(
 )
 
 fun CreateProductDto.toDatabase(): BakeryProduct = BakeryProduct(
-    product_id = 0,
+    id = 0,
     name = name,
     description = description,
     price = price,
