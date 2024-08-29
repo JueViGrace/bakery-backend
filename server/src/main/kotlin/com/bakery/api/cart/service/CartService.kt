@@ -1,8 +1,8 @@
 package com.bakery.api.cart.service
 
-import com.bakery.database.repository.cart.CartRepository
-import com.bakery.database.repository.order.OrderRepository
-import com.bakery.database.repository.product.ProductRepository
+import com.bakery.api.cart.repository.CartRepository
+import com.bakery.api.orders.repository.OrderRepository
+import com.bakery.api.products.repository.ProductRepository
 import com.bakery.models.cart.AddToCartDto
 import com.bakery.models.cart.CartDto
 import com.bakery.models.cart.itemsToDatabase

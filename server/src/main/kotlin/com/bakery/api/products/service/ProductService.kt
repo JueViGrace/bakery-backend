@@ -1,6 +1,6 @@
 package com.bakery.api.products.service
 
-import com.bakery.database.repository.product.ProductRepository
+import com.bakery.api.products.repository.ProductRepository
 import com.bakery.models.product.CreateProductDto
 import com.bakery.models.product.ProductDto
 import com.bakery.models.product.toDatabase

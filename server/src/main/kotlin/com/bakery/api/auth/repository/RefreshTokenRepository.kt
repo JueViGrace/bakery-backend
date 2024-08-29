@@ -1,4 +1,4 @@
-package com.bakery.database.repository.auth
+package com.bakery.api.auth.repository
 
 import com.bakery.Bakery_token as BakeryToken
 import com.bakery.database.source.DataSource

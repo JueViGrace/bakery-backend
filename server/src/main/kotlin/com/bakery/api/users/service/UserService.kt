@@ -1,6 +1,6 @@
 package com.bakery.api.users.service
 
-import com.bakery.database.repository.user.UserRepository
+import com.bakery.api.users.repository.UserRepository
 import com.bakery.models.response.AppResponse
 import com.bakery.models.response.DefaultHttpResponse
 import com.bakery.models.user.UserDto

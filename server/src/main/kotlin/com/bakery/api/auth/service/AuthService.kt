@@ -2,9 +2,9 @@ package com.bakery.api.auth.service
 
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.bakery.common.Constants.SALT_ROUNDS
-import com.bakery.database.repository.auth.RefreshTokenRepository
-import com.bakery.database.repository.cart.CartRepository
-import com.bakery.database.repository.user.UserRepository
+import com.bakery.api.auth.repository.RefreshTokenRepository
+import com.bakery.api.cart.repository.CartRepository
+import com.bakery.api.users.repository.UserRepository
 import com.bakery.models.auth.AuthResponse
 import com.bakery.models.auth.LoginDto
 import com.bakery.models.auth.RegisterDto

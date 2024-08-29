@@ -1,8 +1,8 @@
 package com.bakery.api.cart.di
 
 import com.bakery.api.cart.service.CartService
-import com.bakery.database.repository.cart.CartRepository
-import com.bakery.database.repository.cart.CartRepositoryImpl
+import com.bakery.api.cart.repository.CartRepository
+import com.bakery.api.cart.repository.CartRepositoryImpl
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

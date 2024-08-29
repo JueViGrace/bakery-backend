@@ -1,6 +1,6 @@
 package com.bakery.api.orders.service
 
-import com.bakery.database.repository.order.OrderRepository
+import com.bakery.api.orders.repository.OrderRepository
 import com.bakery.models.order.OrderDto
 import com.bakery.models.order.OrderStatus
 import com.bakery.models.order.UpdateOrderStatus

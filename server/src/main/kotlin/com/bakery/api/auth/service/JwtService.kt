@@ -3,7 +3,7 @@ package com.bakery.api.auth.service
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
-import com.bakery.database.repository.user.UserRepository
+import com.bakery.api.users.repository.UserRepository
 import com.bakery.models.auth.Role
 import io.ktor.server.auth.jwt.JWTCredential
 import io.ktor.server.auth.jwt.JWTPrincipal

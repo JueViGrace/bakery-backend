@@ -1,4 +1,4 @@
-package com.bakery.database.repository.user
+package com.bakery.api.users.repository
 
 import com.bakery.database.source.DataSource
 import kotlinx.coroutines.CoroutineScope

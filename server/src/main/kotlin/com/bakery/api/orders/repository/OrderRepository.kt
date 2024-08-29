@@ -1,4 +1,4 @@
-package com.bakery.database.repository.order
+package com.bakery.api.orders.repository
 
 import com.bakery.Bakery_order as BakeryOrder
 import com.bakery.Bakery_order_products as BakeryOrderWithProducts

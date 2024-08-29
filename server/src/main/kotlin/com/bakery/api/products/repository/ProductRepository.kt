@@ -1,4 +1,4 @@
-package com.bakery.database.repository.product
+package com.bakery.api.products.repository
 
 import com.bakery.Bakery_product
 import com.bakery.database.source.DataSource

@@ -1,4 +1,4 @@
-package com.bakery.database.repository.cart
+package com.bakery.api.cart.repository
 
 import com.bakery.Bakery_cart
 import com.bakery.FindCartById
