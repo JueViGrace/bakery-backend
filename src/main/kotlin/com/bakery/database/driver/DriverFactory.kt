@@ -5,6 +5,9 @@ import app.cash.sqldelight.driver.jdbc.asJdbcDriver
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.Application
+import java.util.logging.Level
+import java.util.logging.LogManager
+import java.util.logging.Logger
 
 object DriverFactory {
 
@@ -36,7 +39,7 @@ object DriverFactory {
                 maximumPoolSize = POOL_SIZE.toInt()
                 isAutoCommit = IS_AUTO_COMMIT.toBoolean()
                 transactionIsolation = TRANSACTION_ISOLATION
-                validate()
+                // validate()
             }
         )
     }
