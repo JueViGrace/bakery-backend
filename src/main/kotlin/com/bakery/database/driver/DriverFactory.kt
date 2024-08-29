@@ -5,9 +5,6 @@ import app.cash.sqldelight.driver.jdbc.asJdbcDriver
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.Application
-import java.util.logging.Level
-import java.util.logging.LogManager
-import java.util.logging.Logger
 
 object DriverFactory {
 
