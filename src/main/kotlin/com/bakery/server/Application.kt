@@ -26,8 +26,6 @@ fun Application.module() {
     configureHTTP()
     configureMonitoring()
     configureSerialization()
-//    configureClient()
-//    configureTemplating()
 
     // Application routes
     appRoutes()
