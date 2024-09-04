@@ -10,6 +10,7 @@ local.properties
 captures
 .externalNativeBuild
 .cxx
+.fleet
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
@@ -17,3 +18,4 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 kls_database.db
+.env

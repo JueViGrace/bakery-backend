@@ -1,17 +1,30 @@
 services:
-  db:
-    container_name: bakery
+  bakery_backend:
+    container_name: bakery_backend
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      bakery_db:
+        condition: service_healthy
+    env_file:
+      - ./.env
+  bakery_db:
+    container_name: bakery_db
     image: postgres:latest
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
-      - 3308:5432
+      - "5432:5432"
     environment:
-      POSTGRES_USER: jvg_25
+      POSTGRES_USER: jvg25
       POSTGRES_PASSWORD: root
       POSTGRES_HOST: localhost
       POSTGRES_DB: bakery_db
     restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
 
 volumes:
   postgres-data:
