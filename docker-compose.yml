@@ -10,17 +10,17 @@ services:
     env_file:
       - ./.env
   bakery_db:
-    container_name: bakery_db
-    image: postgres:latest
+    container_name: ${BAKERY_DB_NAME}
+    image: postgres
     volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: jvg25
-      POSTGRES_PASSWORD: root
-      POSTGRES_HOST: localhost
-      POSTGRES_DB: bakery_db
+      - POSTGRES_USER=${BAKERY_DB_USERNAME}
+      - POSTGRES_PASSWORD=${BAKERY_DB_PASSWORD}
+      - POSTGRES_DB=${BAKERY_DB_NAME}
     restart: always
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
@@ -28,3 +28,4 @@ services:
 
 volumes:
   postgres-data:
+    name: postgres-data
