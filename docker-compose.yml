@@ -1,7 +1,10 @@
 services:
-  bakery_backend:
-    container_name: bakery_backend
-    build: .
+  bakery:
+    container_name: bakery
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bakery:v1
     ports:
       - "5000:5000"
     depends_on:
@@ -11,7 +14,7 @@ services:
       - ./.env
   bakery_db:
     container_name: ${BAKERY_DB_NAME}
-    image: postgres
+    image: postgres:latest
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-data:/var/lib/postgresql/data
